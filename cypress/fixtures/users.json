@@ -1,0 +1,24 @@
+{
+  "validUser": {
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "message": "This is a test message from Cypress E2E tests. It should be long enough to pass validation."
+  },
+  "invalidUser": {
+    "name": "",
+    "email": "invalid-email",
+    "message": "Short"
+  },
+  "testUsers": [
+    {
+      "name": "Alice Smith",
+      "email": "alice@example.com",
+      "message": "Hello from Alice! This is a comprehensive test message to ensure the form works correctly."
+    },
+    {
+      "name": "Bob Johnson",
+      "email": "bob@example.com", 
+      "message": "Bob here! Testing the contact form functionality with a detailed message."
+    }
+  ]
+}
