@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import Home from './pages/Home'
 import About from './pages/About'
 import Contact from './pages/Contact'
+import SignUp from './pages/SignUp'
 import './App.css'
 
 // Navigation component
@@ -55,6 +56,19 @@ const Navigation: React.FC = () => {
       >
         Contact
       </Link>
+      <Link 
+        to="/signup" 
+        style={{ 
+          textDecoration: 'none', 
+          color: '#646cff', 
+          fontWeight: 'bold',
+          padding: '8px 16px',
+          borderRadius: '4px',
+          transition: 'background-color 0.3s'
+        }}
+      >
+        Sign Up
+      </Link>
     </nav>
   )
 }
@@ -70,6 +84,7 @@ const App: React.FC = () => {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/signup" element={<SignUp />} />
             <Route path="*" element={
               <div>
                 <h1>404 - Page Not Found</h1>
