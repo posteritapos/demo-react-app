@@ -5,6 +5,7 @@ import { MemoryRouter, Routes, Route, Link } from 'react-router-dom'
 import Home from '../pages/Home'
 import About from '../pages/About'
 import Contact from '../pages/Contact'
+import SignUp from '../pages/SignUp'
 
 // Mock the SVG imports
 jest.mock('../assets/react.svg', () => 'react-logo.svg')
@@ -30,6 +31,9 @@ const TestApp = () => {
       <Link to="/contact" style={{ textDecoration: 'none', color: '#646cff', fontWeight: 'bold' }}>
         Contact
       </Link>
+      <Link to="/signup" style={{ textDecoration: 'none', color: '#646cff', fontWeight: 'bold' }}>
+        Sign Up
+      </Link>
     </nav>
   )
 
@@ -41,6 +45,7 @@ const TestApp = () => {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="*" element={
             <div>
               <h1>404 - Page Not Found</h1>
@@ -65,6 +70,7 @@ describe('App Component', () => {
     expect(screen.getByRole('link', { name: /home/i })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /about/i })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /contact/i })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /sign up/i })).toBeInTheDocument()
   })
 
   test('renders home page by default', () => {
@@ -120,6 +126,22 @@ describe('App Component', () => {
     expect(screen.getByRole('link', { name: /go back to home/i })).toBeInTheDocument()
   })
 
+  test('navigates to signup page when signup link is clicked', async () => {
+    const user = userEvent.setup()
+    render(
+      <MemoryRouter>
+        <TestApp />
+      </MemoryRouter>
+    )
+    
+    const signupLink = screen.getByRole('link', { name: /sign up/i })
+    await user.click(signupLink)
+    
+    expect(screen.getByRole('heading', { name: /sign up/i })).toBeInTheDocument()
+    expect(screen.getByLabelText(/email/i)).toBeInTheDocument()
+    expect(screen.getByLabelText(/password/i)).toBeInTheDocument()
+  })
+
   test('navigation links have correct styling', () => {
     render(
       <MemoryRouter>
@@ -130,9 +152,11 @@ describe('App Component', () => {
     const homeLink = screen.getByRole('link', { name: /home/i })
     const aboutLink = screen.getByRole('link', { name: /about/i })
     const contactLink = screen.getByRole('link', { name: /contact/i })
+    const signupLink = screen.getByRole('link', { name: /sign up/i })
     
     expect(homeLink).toHaveStyle({ color: '#646cff' })
     expect(aboutLink).toHaveStyle({ color: '#646cff' })
     expect(contactLink).toHaveStyle({ color: '#646cff' })
+    expect(signupLink).toHaveStyle({ color: '#646cff' })
   })
 })
