@@ -80,7 +80,7 @@ describe('App Component', () => {
       </MemoryRouter>
     )
     
-    expect(screen.getByText('Vite + React + TypeScript')).toBeInTheDocument()
+    expect(screen.getByText('Hello React JS')).toBeInTheDocument()
     expect(screen.getByText(/count is 0/i)).toBeInTheDocument()
   })
 

@@ -11,7 +11,7 @@ describe('Home Component', () => {
     render(<Home />)
     
     // Check if the main heading is present
-    expect(screen.getByText('Vite + React + TypeScript')).toBeInTheDocument()
+    expect(screen.getByText('Hello React JS')).toBeInTheDocument()
     
     // Check if logos are present
     const viteLogo = screen.getByAltText('Vite logo')
@@ -24,17 +24,33 @@ describe('Home Component', () => {
   test('counter functionality works correctly', () => {
     render(<Home />)
     
-    // Find the counter button
-    const counterButton = screen.getByRole('button', { name: /count is 0/i })
-    expect(counterButton).toBeInTheDocument()
+    // Find the counter display and buttons
+    expect(screen.getByText('count is 0')).toBeInTheDocument()
+    const increaseButton = screen.getByRole('button', { name: '+' })
+    const decreaseButton = screen.getByRole('button', { name: '-' })
     
-    // Click the button and check if count increases
-    fireEvent.click(counterButton)
-    expect(screen.getByRole('button', { name: /count is 1/i })).toBeInTheDocument()
+    expect(increaseButton).toBeInTheDocument()
+    expect(decreaseButton).toBeInTheDocument()
+    
+    // Click the increase button and check if count increases
+    fireEvent.click(increaseButton)
+    expect(screen.getByText('count is 1')).toBeInTheDocument()
     
     // Click again to verify it continues to increment
-    fireEvent.click(counterButton)
-    expect(screen.getByRole('button', { name: /count is 2/i })).toBeInTheDocument()
+    fireEvent.click(increaseButton)
+    expect(screen.getByText('count is 2')).toBeInTheDocument()
+    
+    // Click the decrease button and check if count decreases
+    fireEvent.click(decreaseButton)
+    expect(screen.getByText('count is 1')).toBeInTheDocument()
+    
+    // Click decrease again
+    fireEvent.click(decreaseButton)
+    expect(screen.getByText('count is 0')).toBeInTheDocument()
+    
+    // Test that it can go negative
+    fireEvent.click(decreaseButton)
+    expect(screen.getByText('count is -1')).toBeInTheDocument()
   })
 
   test('renders external links with correct attributes', () => {

@@ -7,11 +7,16 @@ describe('Complete User Journey', () => {
       
       // Start at home page
       cy.visit('/')
-      cy.get('h1').should('contain', 'Vite + React + TypeScript')
+      cy.get('h1').should('contain', 'Hello React JS')
       
       // Test counter functionality
-      cy.get('button').contains('count is').click()
-      cy.get('button').should('contain', 'count is 1')
+      cy.contains('count is 0').should('be.visible')
+      cy.get('button').contains('+').click()
+      cy.contains('count is 1').should('be.visible')
+      cy.get('button').contains('+').click()
+      cy.contains('count is 2').should('be.visible')
+      cy.get('button').contains('-').click()
+      cy.contains('count is 1').should('be.visible')
       
       // Navigate to About page
       cy.get('nav a[href="/about"]').click()
@@ -44,7 +49,7 @@ describe('Complete User Journey', () => {
       cy.visit('/') // Let's explicitly go to home
       
       // Verify we're back at home and counter state is preserved
-      cy.get('h1').should('contain', 'Vite + React + TypeScript')
+      cy.get('h1').should('contain', 'Hello React JS')
       
       // Test external links (without actually following them)
       cy.get('a[href="https://vite.dev"]')
@@ -66,21 +71,21 @@ describe('Complete User Journey', () => {
     // Test navigation from 404
     cy.get('a[href="/"]').first().click()
     cy.url().should('eq', Cypress.config().baseUrl + '/')
-    cy.get('h1').should('contain', 'Vite + React + TypeScript')
+    cy.get('h1').should('contain', 'Hello React JS')
   })
 
   it('should maintain state across navigation', () => {
     // Start at home and interact with counter
     cy.visit('/')
-    cy.get('button').contains('count is').click().click().click()
-    cy.get('button').should('contain', 'count is 3')
+    cy.get('button').contains('+').click().click().click()
+    cy.get('div').contains('count is 3').should('exist')
     
     // Navigate away and back
     cy.get('nav a[href="/about"]').click()
     cy.get('nav a[href="/"]').click()
     
     // Counter should reset (component unmount/remount)
-    cy.get('button').should('contain', 'count is 0')
+    cy.get('div').contains('count is 0').should('exist')
   })
 
   it('should work correctly with browser navigation', () => {
@@ -108,7 +113,7 @@ describe('Complete User Journey', () => {
     cy.go('back')
     cy.go('back')
     cy.url().should('eq', Cypress.config().baseUrl + '/')
-    cy.get('h1').should('contain', 'Vite + React + TypeScript')
+    cy.get('h1').should('contain', 'Hello React JS')
   })
 
   it('should be responsive and work on different viewports', () => {
@@ -125,7 +130,7 @@ describe('Complete User Journey', () => {
       cy.visit('/')
       cy.get('h1').should('be.visible')
       cy.get('nav').should('be.visible')
-      cy.get('button').contains('count is').should('be.visible')
+      cy.get('div').contains('count is').should('be.visible')
       
       // Test navigation works on all viewports
       cy.get('nav a[href="/about"]').click()

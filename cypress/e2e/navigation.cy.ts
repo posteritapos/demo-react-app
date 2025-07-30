@@ -8,7 +8,7 @@ describe('Navigation and Routing', () => {
   it('should navigate between pages using navigation links', () => {
     // Start on Home page
     cy.url().should('eq', Cypress.config().baseUrl + '/')
-    cy.contains('Vite + React + TypeScript').should('be.visible')
+    cy.contains('Hello React JS').should('be.visible')
 
     // Navigate to About page
     cy.get('nav a[href="/about"]').click()
@@ -25,7 +25,7 @@ describe('Navigation and Routing', () => {
     // Navigate back to Home
     cy.get('nav a[href="/"]').click()
     cy.url().should('eq', Cypress.config().baseUrl + '/')
-    cy.contains('Vite + React + TypeScript').should('be.visible')
+    cy.contains('Hello React JS').should('be.visible')
   })
 
   it('should handle direct URL navigation', () => {
@@ -41,7 +41,7 @@ describe('Navigation and Routing', () => {
     
     // Direct navigation back to Home
     cy.visit('/')
-    cy.contains('Vite + React + TypeScript').should('be.visible')
+    cy.contains('Hello React JS').should('be.visible')
   })
 
   it('should show 404 page for unknown routes', () => {
@@ -55,13 +55,13 @@ describe('Navigation and Routing', () => {
     // Test the back to home link
     cy.get('a[href="/"]').contains('Go back to Home').click()
     cy.url().should('eq', Cypress.config().baseUrl + '/')
-    cy.contains('Vite + React + TypeScript').should('be.visible')
+    cy.contains('Hello React JS').should('be.visible')
   })
 
   it('should maintain navigation state during page transitions', () => {
     // Check that navigation is consistent across pages
     const pages = [
-      { path: '/', title: 'Vite + React + TypeScript' },
+      { path: '/', title: 'Hello React JS' },
       { path: '/about', title: 'About Page' },
       { path: '/contact', title: 'Contact Us' }
     ]
@@ -98,7 +98,7 @@ describe('Navigation and Routing', () => {
     
     cy.go('back')
     cy.url().should('eq', Cypress.config().baseUrl + '/')
-    cy.contains('Vite + React + TypeScript').should('be.visible')
+    cy.contains('Hello React JS').should('be.visible')
     
     // Use browser forward button
     cy.go('forward')

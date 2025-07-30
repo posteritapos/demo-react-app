@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 
-interface SignUpForm {
+interface SignInForm {
   email: string
   password: string
 }
 
-const SignUp: React.FC = () => {
-  const [form, setForm] = useState<SignUpForm>({
+const SignIn: React.FC = () => {
+  const [form, setForm] = useState<SignInForm>({
     email: '',
     password: ''
   })
@@ -23,10 +23,10 @@ const SignUp: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log('Sign up form submitted:', form)
+    console.log('Sign in form submitted:', form)
     setSubmitted(true)
     
-    // Reset form after 2 seconds
+    // Reset form after 2 seconds (consistent with SignUp)
     setTimeout(() => {
       setSubmitted(false)
       setForm({ email: '', password: '' })
@@ -36,16 +36,16 @@ const SignUp: React.FC = () => {
   if (submitted) {
     return (
       <div>
-        <h1>Welcome!</h1>
-        <p>Your account has been created successfully. You can now sign in!</p>
+        <h1>Welcome Back!</h1>
+        <p>You have successfully signed in to your account.</p>
       </div>
     )
   }
 
   return (
     <div>
-      <h1>Sign Up</h1>
-      <p>Create your account using the form below:</p>
+      <h1>Sign In</h1>
+      <p>Welcome back! Please sign in to your account:</p>
       
       <form onSubmit={handleSubmit} style={{ maxWidth: '500px', marginTop: '20px' }}>
         <div style={{ marginBottom: '15px' }}>
@@ -80,6 +80,7 @@ const SignUp: React.FC = () => {
             value={form.password}
             onChange={handleInputChange}
             required
+            minLength={6}
             style={{
               width: '100%',
               padding: '8px',
@@ -102,16 +103,16 @@ const SignUp: React.FC = () => {
             cursor: 'pointer'
           }}
         >
-          Sign Up
+          Sign In
         </button>
       </form>
       
       <div style={{ marginTop: '30px' }}>
-        <h2>Already have an account?</h2>
-        <p>If you already have an account, you can <a href="/signin" style={{ color: '#646cff', textDecoration: 'none', fontWeight: 'bold' }}>sign in here</a>.</p>
+        <h2>Don't have an account?</h2>
+        <p>If you don't have an account, you can <a href="/signup" style={{ color: '#646cff', textDecoration: 'none' }}>sign up here</a>.</p>
       </div>
     </div>
   )
 }
 
-export default SignUp
+export default SignIn

@@ -6,8 +6,8 @@ describe('Home Page', () => {
   })
 
   it('should load the home page successfully', () => {
-    cy.contains('Vite + React + TypeScript').should('be.visible')
-    cy.get('h1').should('contain', 'Vite + React + TypeScript')
+    cy.contains('Hello React JS').should('be.visible')
+    cy.get('h1').should('contain', 'Hello React JS')
   })
 
   it('should display the correct logos', () => {
@@ -21,17 +21,21 @@ describe('Home Page', () => {
 
   it('should have a working counter', () => {
     // Initial state
-    cy.get('button').should('contain', 'count is 0')
+    cy.get('div').contains('count is 0').should('be.visible')
     
-    // Click the button multiple times
-    cy.get('button').click()
-    cy.get('button').should('contain', 'count is 1')
+    // Click the + button multiple times
+    cy.get('button').contains('+').click()
+    cy.get('div').contains('count is 1').should('be.visible')
     
-    cy.get('button').click()
-    cy.get('button').should('contain', 'count is 2')
+    cy.get('button').contains('+').click()
+    cy.get('div').contains('count is 2').should('be.visible')
     
-    cy.get('button').click()
-    cy.get('button').should('contain', 'count is 3')
+    cy.get('button').contains('+').click()
+    cy.get('div').contains('count is 3').should('be.visible')
+    
+    // Test the - button
+    cy.get('button').contains('-').click()
+    cy.get('div').contains('count is 2').should('be.visible')
   })
 
   it('should display helpful development text', () => {

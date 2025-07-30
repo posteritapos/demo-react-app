@@ -71,7 +71,8 @@ describe('SignUp Component', () => {
     render(<SignUp />)
     
     expect(screen.getByText('Already have an account?')).toBeInTheDocument()
-    expect(screen.getByText(/If you already have an account, you can sign in here/)).toBeInTheDocument()
+    expect(screen.getByText(/If you already have an account, you can/)).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /sign in here/i })).toBeInTheDocument()
   })
 
   test('requires all fields to be filled', async () => {
