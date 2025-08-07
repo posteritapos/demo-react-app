@@ -84,6 +84,19 @@ const Navigation: React.FC = () => {
       >
         Sign In
       </Link>
+      <Link 
+        to="/dashboard" 
+        style={{ 
+          textDecoration: 'none', 
+          color: '#646cff', 
+          fontWeight: 'bold',
+          padding: '8px 16px',
+          borderRadius: '4px',
+          transition: 'background-color 0.3s'
+        }}
+      >
+        Dashboard
+      </Link>
     </nav>
   )
 }
@@ -117,3 +130,4 @@ const App: React.FC = () => {
 }
 
 export default App
+
