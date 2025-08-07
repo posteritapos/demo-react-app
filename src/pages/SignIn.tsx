@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface SignInForm {
   email: string
@@ -8,10 +9,9 @@ interface SignInForm {
 const SignIn: React.FC = () => {
   const [form, setForm] = useState<SignInForm>({
     email: '',
-    password: ''
-  })
-  
-  const [submitted, setSubmitted] = useState<boolean>(false)
+    password: '',
+  });
+  const navigate = useNavigate();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -24,22 +24,9 @@ const SignIn: React.FC = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     console.log('Sign in form submitted:', form)
-    setSubmitted(true)
-    
-    // Reset form after 2 seconds (consistent with SignUp)
-    setTimeout(() => {
-      setSubmitted(false)
-      setForm({ email: '', password: '' })
-    }, 2000)
-  }
-
-  if (submitted) {
-    return (
-      <div>
-        <h1>Welcome Back!</h1>
-        <p>You have successfully signed in to your account.</p>
-      </div>
-    )
+    // Redirect to dashboard upon successful sign-in
+    navigate('/dashboard');
+    setForm({ email: '', password: '' }); // Reset form
   }
 
   return (
@@ -116,3 +103,4 @@ const SignIn: React.FC = () => {
 }
 
 export default SignIn
+
